@@ -45,7 +45,6 @@ class Scraper
   attr_reader :page
 
   def scrape_page
-    Kernel.binding.pry
     browser.goto(URL + page.to_s)
 
     search_results.map do |result|
