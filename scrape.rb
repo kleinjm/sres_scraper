@@ -26,13 +26,13 @@ class Scraper
     CSV.open('tmp/results.csv', 'wb') do |csv|
       csv << HEADERS
 
-      until browser.div(EMPTY_SELECTOR).exist? # beyond last page
+      until browser.div(class: EMPTY_SELECTOR).exist? # beyond last page
         scrape_page.each do |result|
           csv << result.values
         end
       end
 
-      page += 1
+      @page += 1
       clear_results
     end
   ensure
@@ -41,6 +41,8 @@ class Scraper
   end
 
   private
+
+  attr_reader :page
 
   def scrape_page
     browser.goto(URL + page.to_s)
