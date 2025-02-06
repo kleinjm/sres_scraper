@@ -30,10 +30,10 @@ class Scraper
         scrape_page.each do |result|
           csv << result.values
         end
-      end
 
-      @page += 1
-      clear_results
+        @page += 1
+        clear_results
+      end
     end
   ensure
     browser.close
@@ -45,6 +45,7 @@ class Scraper
   attr_reader :page
 
   def scrape_page
+    Kernel.binding.pry
     browser.goto(URL + page.to_s)
 
     search_results.map do |result|
